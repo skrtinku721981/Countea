@@ -1,0 +1,48 @@
+.img {
+  background-image: url("./Untitled-design-13.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+    background-attachment: fixed;
+  height: 100vh;
+  width: 100vw;
+   overflow-y: hidden;
+  overflow-x: hidden;
+  position: relative;
+  z-index: -1; /* Ensure the image is behind other content */
+  animation: fadeIn 2s ease-in-out; 
+}
+.center {
+   position: fixed; /* or absolute */
+  top: 55%;
+  left: 44%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: rgb(24, 1, 1);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 2s ease-in-out;
+  }
+
+
+  /* Add this to your CSS file, e.g., home.css */
+   
+
+
+  .floating-others-input {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  z-index: 10;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+  padding: 1px;
+}
+.input-group.with-others {
+  padding-bottom: 15px; /* Adjust as needed for your input height */
+
+}
