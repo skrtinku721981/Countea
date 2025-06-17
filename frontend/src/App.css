@@ -1,21 +1,25 @@
 .img {
-  background-image: url("./Untitled-design-13.webp");
-  background-size: cover;
+  background-image: url("./snacks.jpg");
+  background-size: cover;           /* Ensures the whole image fits */
   background-position: center;
   background-repeat: no-repeat;
-    background-attachment: fixed;
+  background-attachment: fixed;
   height: 100vh;
   width: 100vw;
-   overflow-y: hidden;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow-y: hidden;
   overflow-x: hidden;
-  position: relative;
-  z-index: -1; /* Ensure the image is behind other content */
-  animation: fadeIn 2s ease-in-out; 
+  position: fixed;                    /* Ensures it stays as the background */
+  top: 0;
+  left: 0;
+  z-index: -1;
+  animation: fadeIn 2s ease-in-out;
 }
 .center {
    position: fixed; /* or absolute */
-  top: 55%;
-  left: 44%;
+  top: 50%;
+  left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
   text-align: center;

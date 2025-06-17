@@ -42,7 +42,12 @@ const Home = () => {
   };
 
   return (
-    <div className='center' style={{ backgroundColor: 'rgba(188, 183, 230, 0.99)', padding: '20px', borderRadius: '5px' }}>
+    <div className='center' style={{
+      background: 'rgba(255, 255, 255, 0.7)', // Light, semi-transparent
+      padding: '20px',
+      borderRadius: '12px',
+      boxShadow: '0 4px 24px rgba(0,0,0,0.10)'
+    }} >
       {/* input field */}
       <div className="mb-3">
         <label htmlFor="ename" className="form-label">Employee Name</label>
