@@ -1,8 +1,12 @@
-const mongoose=require('mongoose');
-const mongoURI="mongodb://localhost:27017"    //to create a new file in the database 
-const connectToMongo=()=>{
-    mongoose.connect(mongoURI,()=>{
+const mongoose = require('mongoose');
+const mongoURI = "mongodb+srv://gaurav:<kzU6RK1Q19IT8dGA>@cluster0.mxkrmkm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+const connectToMongo = async () => {
+    try {
+        await mongoose.connect(mongoURI);
         console.log("connected to mongo");
-    })
+    } catch (error) {
+        console.error("MongoDB connection error:", error);
+    }
 }
-module.exports=connectToMongo; 
+module.exports = connectToMongo;
