@@ -1,6 +1,6 @@
 .img {
   background-image: url("./cupimg.webp");
-  background-size: contain;           /* Ensures the whole image fits */
+  background-size: 100vw auto;           /* Ensures the whole image fits */
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
