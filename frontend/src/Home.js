@@ -42,6 +42,7 @@ const Home = () => {
   };
 
   return (
+    <div className='container'>
     <div className='center' style={{
       background: 'rgba(255, 255, 255, 0.7)', // Light, semi-transparent
       padding: '20px',
@@ -152,6 +153,7 @@ const Home = () => {
         )}
       </div>
     </div>
+</div>
   )
 }
 
