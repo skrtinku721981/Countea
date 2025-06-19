@@ -44,6 +44,17 @@
   }
 }
 
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Optional: add some padding for small screens */
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
   /* Add this to your CSS file, e.g., home.css */
    
 
