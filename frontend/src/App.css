@@ -1,6 +1,6 @@
 .img {
   background-image: url("./cup-coffee.jpg");
-  background-size: contain;           /* Ensures the whole image fits */
+  background-size: cover;           /* Ensures the whole image fits */
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
