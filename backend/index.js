@@ -4,7 +4,7 @@ const app = express()
 
 const cors=require("cors");
 app.use(cors({
- // origin: "https://countea-frontend.onrender.com"
+  origin: "https://countea-frontend.onrender.com"
 }));
 //app.use(cors());
 
