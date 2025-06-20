@@ -28,7 +28,8 @@
   font-size: 1.2rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   animation: fadeIn 2s ease-in-out;
-    
+      background-color: rgba(0, 0, 0, 0); /* Fully transparent */
+  border: 2px solid rgba(0, 0, 0, 0.5); /* Semi-transparent border */
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
