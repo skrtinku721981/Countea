@@ -26,14 +26,27 @@ const Home = () => {
   const handleClick = (e) => {
     e.preventDefault();
     // Prepare snacks array for backend
-    const snacksArr = Object.entries(note.snacks).map(([snack, qty]) => ({
+    let snacksArr = Object.entries(note.snacks).map(([snack, qty]) => ({
       snack,
       quantity: qty
     }));
+
+    // If "others" is selected, replace it with the value from otherSnack
+    if (note.snacks["others"] !== undefined && note.otherSnack.trim() !== "") {
+      snacksArr = snacksArr.map(item =>
+        item.snack === "others"
+          ? { snack: note.otherSnack.trim(), quantity: item.quantity }
+          : item
+      );
+    }
+
+    // Prepare data to send (exclude otherSnack)
+    const { otherSnack, ...rest } = note;
     const dataToSend = {
-      ...note,
+      ...rest,
       snacks: snacksArr
     };
+
     console.log(dataToSend);
     sendDataToBackend(dataToSend);
 
@@ -105,8 +118,6 @@ const Home = () => {
   return (
     <div className='container'>
       <div className='center' style={{
-       // background: 'rgba(255, 255, 255, 0.7)',
-     
         padding: '20px',
         borderRadius: '12px',
         boxShadow: '0 4px 24px rgba(0,0,0,0.10)'
