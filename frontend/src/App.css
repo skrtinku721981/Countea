@@ -78,8 +78,7 @@
 
 
 /* Make dropdown button and menu full width */
-.full-width-dropdown .dropdown-toggle,
-.full-width-dropdown .dropdown-menu {
+.full-width-dropdown .dropdown-toggle {
   width: 100%;
   min-width: unset;
   box-sizing: border-box;
