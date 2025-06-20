@@ -85,7 +85,7 @@
 }
 /* Make dropdown menu  full width */
 .full-width-dropdown .dropdown-menu {
-  width: 260px;
+  width: 60px;
   min-width: 0;
   box-sizing: border-box;
 }
