@@ -17,16 +17,25 @@ const Home = () => {
     ename: "",
     eid: "",
     department: "",
-    snacks: [],
-    quantity: "",
+    snacks: {}, // { snackName: quantity }
     remarks: "",
     otherSnack: ""
   });
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(note);
-    sendDataToBackend(note);
+    // Prepare snacks array for backend
+    const snacksArr = Object.entries(note.snacks).map(([snack, qty]) => ({
+      snack,
+      quantity: qty
+    }));
+    const dataToSend = {
+      ...note,
+      snacks: snacksArr
+    };
+    console.log(dataToSend);
+    sendDataToBackend(dataToSend);
 
     setShowMessage(true); // Show the success message
     setTimeout(() => {
@@ -39,23 +48,38 @@ const Home = () => {
   };
 
   // Handle checkbox changes for snacks
-  const handleSnackChange = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setNote({ ...note, snacks: [...note.snacks, value] });
+  const handleSnackChange = (snack) => (e) => {
+    if (e.target.checked) {
+      setNote((prev) => ({
+        ...prev,
+        snacks: { ...prev.snacks, [snack]: 1 }
+      }));
     } else {
-      setNote({ ...note, snacks: note.snacks.filter(snack => snack !== value) });
+      setNote((prev) => {
+        const newSnacks = { ...prev.snacks };
+        delete newSnacks[snack];
+        return { ...prev, snacks: newSnacks };
+      });
     }
   };
 
-  const sendDataToBackend = async (dataArray) => {
+  // Handle quantity change for each snack
+  const handleQuantityChange = (snack) => (e) => {
+    const value = Math.max(1, Number(e.target.value));
+    setNote((prev) => ({
+      ...prev,
+      snacks: { ...prev.snacks, [snack]: value }
+    }));
+  };
+
+  const sendDataToBackend = async (data) => {
     try {
       const response = await fetch('https://countea-backend.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dataArray)
+        body: JSON.stringify(data)
       });
 
       if (response.ok) {
@@ -68,6 +92,15 @@ const Home = () => {
       console.error('Error:', error);
     }
   };
+
+  // Validation for submit button
+  const isSubmitDisabled =
+    note.ename.length < 3 ||
+    note.eid.length < 5 ||
+    note.department.length < 2 ||
+    Object.keys(note.snacks).length < 1 ||
+    note.remarks.length < 2 ||
+    (note.snacks["others"] !== undefined && note.otherSnack.trim().length === 0);
 
   return (
     <div className='container'>
@@ -91,28 +124,47 @@ const Home = () => {
           <input type="text" className="form-control" name="department" id="department" placeholder="Please enter your department" value={note.department} onChange={onChange} />
         </div>
 
-        {/* snacks checkboxes */}
+        {/* snacks dropdown with checkboxes and quantity */}
         <div className="mb-3">
           <label className="form-label">Snacks</label>
-          <div className="d-flex flex-wrap gap-2">
-            {SNACK_OPTIONS.map(snack => (
-              <div key={snack} className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id={snack}
-                  name="snacks"
-                  value={snack}
-                  checked={note.snacks.includes(snack)}
-                  onChange={handleSnackChange}
-                />
-                <label className="form-check-label" htmlFor={snack}>
-                  {snack.charAt(0).toUpperCase() + snack.slice(1)}
-                </label>
-              </div>
-            ))}
+          <div className="dropdown">
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              type="button"
+              onClick={() => setDropdownOpen((open) => !open)}
+            >
+              Select Snacks
+            </button>
+            <ul className={`dropdown-menu${dropdownOpen ? " show" : ""}`} style={{ minWidth: 250, maxHeight: 300, overflowY: "auto" }}>
+              {SNACK_OPTIONS.map((snack) => (
+                <li key={snack} className="px-3 py-1 d-flex align-items-center">
+                  <input
+                    className="form-check-input me-2"
+                    type="checkbox"
+                    id={snack}
+                    checked={note.snacks[snack] !== undefined}
+                    onChange={handleSnackChange(snack)}
+                  />
+                  <label className="form-check-label me-2" htmlFor={snack}>
+                    {snack.charAt(0).toUpperCase() + snack.slice(1)}
+                  </label>
+                  {note.snacks[snack] !== undefined && (
+                    <input
+                      type="number"
+                      min="1"
+                      value={note.snacks[snack]}
+                      onChange={handleQuantityChange(snack)}
+                      style={{ width: 50, marginLeft: 8 }}
+                      className="form-control form-control-sm"
+                      placeholder="Qty"
+                    />
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
-          {note.snacks.includes("others") && (
+          {/* Show "others" input if selected */}
+          {note.snacks["others"] !== undefined && (
             <input
               type="text"
               className="form-control mt-2"
@@ -127,21 +179,6 @@ const Home = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="quantity" className="form-label">Quantity</label>
-          <input
-            type="number"
-            min="0"
-            className="form-control"
-            name="quantity"
-            id="quantity"
-            placeholder="Quantity"
-            value={note.quantity}
-            onChange={onChange}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
           <label htmlFor="remarks" className="form-label">Remarks</label>
           <textarea className="form-control" name='remarks' id="remarks" rows="2" placeholder="Enter the remarks" value={note.remarks} onChange={onChange} required></textarea>
         </div>
@@ -149,15 +186,7 @@ const Home = () => {
         {/* button */}
         <div className="d-grid gap-2">
           <button
-            disabled={
-              note.ename.length < 3 ||
-              note.eid.length < 5 ||
-              note.department.length < 2 ||
-              Number(note.quantity) < 1 ||
-              note.remarks.length < 2 ||
-              note.snacks.length < 1 ||
-              (note.snacks.includes("others") && note.otherSnack.trim().length === 0)
-            }
+            disabled={isSubmitDisabled}
             className="btn btn-primary"
             type="submit"
             onClick={handleClick}
