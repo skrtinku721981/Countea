@@ -29,7 +29,7 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   animation: fadeIn 2s ease-in-out;
       background-color: rgba(0, 0, 0, 0); /* Fully transparent */
-  border: 2px solid rgba(0, 0, 0, 0.5); /* Semi-transparent border */
+ 
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
@@ -100,4 +100,9 @@
 .dropdown-menu .snack-row .form-control-sm {
   width: 60px;
   margin-left: 8px;
+}
+
+.form-label {
+  color: #ebecf1; /* Deep blue, change to any color you like */
+  font-weight: 600; /* Optional: make labels bold */
 }
