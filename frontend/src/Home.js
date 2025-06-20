@@ -126,59 +126,59 @@ const Home = () => {
 
         {/* snacks dropdown with checkboxes and quantity */}
         <div className="mb-3">
-  <label className="form-label">Snacks</label>
-  <div className="dropdown full-width-dropdown">
-    <button
-      className="btn btn-secondary dropdown-toggle"
-      type="button"
-      style={{ width: "100%" }}
-      onClick={() => setDropdownOpen((open) => !open)}
-    >
-      Select Snacks
-    </button>
-    <ul className={`dropdown-menu${dropdownOpen ? " show" : ""}`} style={{ width: "100%", maxHeight: 300, overflowY: "auto" }}>
-      {SNACK_OPTIONS.map((snack) => (
-        <li key={snack} className="snack-row px-3 py-1">
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <input
-              className="form-check-input me-2"
-              type="checkbox"
-              id={snack}
-              checked={note.snacks[snack] !== undefined}
-              onChange={handleSnackChange(snack)}
-            />
-            <label className="form-check-label me-2" htmlFor={snack}>
-              {snack.charAt(0).toUpperCase() + snack.slice(1)}
-            </label>
+          <label className="form-label">Snacks</label>
+          <div className="dropdown full-width-dropdown">
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              type="button"
+              style={{ width: "100%" }}
+              onClick={() => setDropdownOpen((open) => !open)}
+            >
+              Select Snacks
+            </button>
+            <ul className={`dropdown-menu${dropdownOpen ? " show" : ""}`} style={{ maxHeight: 300, overflowY: "auto" }}>
+              {SNACK_OPTIONS.map((snack) => (
+                <li key={snack} className="snack-row px-3 py-1">
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <input
+                      className="form-check-input me-2"
+                      type="checkbox"
+                      id={snack}
+                      checked={note.snacks[snack] !== undefined}
+                      onChange={handleSnackChange(snack)}
+                    />
+                    <label className="form-check-label me-2" htmlFor={snack}>
+                      {snack.charAt(0).toUpperCase() + snack.slice(1)}
+                    </label>
+                  </div>
+                  {note.snacks[snack] !== undefined && (
+                    <input
+                      type="number"
+                      min="1"
+                      value={note.snacks[snack]}
+                      onChange={handleQuantityChange(snack)}
+                      className="form-control form-control-sm"
+                      placeholder="Qty"
+                    />
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
-          {note.snacks[snack] !== undefined && (
+          {/* Show "others" input if selected */}
+          {note.snacks["others"] !== undefined && (
             <input
-              type="number"
-              min="1"
-              value={note.snacks[snack]}
-              onChange={handleQuantityChange(snack)}
-              className="form-control form-control-sm"
-              placeholder="Qty"
+              type="text"
+              className="form-control mt-2"
+              name="otherSnack"
+              id="otherSnack"
+              placeholder="Please specify"
+              value={note.otherSnack}
+              onChange={onChange}
+              required
             />
           )}
-        </li>
-      ))}
-    </ul>
-  </div>
-  {/* Show "others" input if selected */}
-  {note.snacks["others"] !== undefined && (
-    <input
-      type="text"
-      className="form-control mt-2"
-      name="otherSnack"
-      id="otherSnack"
-      placeholder="Please specify"
-      value={note.otherSnack}
-      onChange={onChange}
-      required
-    />
-  )}
-</div>
+        </div>
 
         <div className="mb-3">
           <label htmlFor="remarks" className="form-label">Remarks</label>
