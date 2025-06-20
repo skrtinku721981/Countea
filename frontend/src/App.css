@@ -74,3 +74,24 @@
   padding-bottom: 15px; /* Adjust as needed for your input height */
 
 }
+
+
+
+/* Make dropdown button and menu full width */
+.full-width-dropdown .dropdown-toggle,
+.full-width-dropdown .dropdown-menu {
+  width: 100%;
+  min-width: unset;
+  box-sizing: border-box;
+}
+
+/* Align quantity input to the right */
+.dropdown-menu .snack-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dropdown-menu .snack-row .form-control-sm {
+  width: 60px;
+  margin-left: 8px;
+}
