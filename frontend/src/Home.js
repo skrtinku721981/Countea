@@ -105,7 +105,7 @@ const Home = () => {
   return (
     <div className='container'>
       <div className='center' style={{
-        background: 'rgba(255, 255, 255, 0.7)',
+       // background: 'rgba(255, 255, 255, 0.7)',
         padding: '20px',
         borderRadius: '12px',
         boxShadow: '0 4px 24px rgba(0,0,0,0.10)'
