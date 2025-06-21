@@ -106,3 +106,7 @@
   color: #ebecf1; /* Deep blue, change to any color you like */
   font-weight: 600; /* Optional: make labels bold */
 }
+
+.full-width-dropdown .dropdown-toggle::after {
+  display: none !important;
+}
