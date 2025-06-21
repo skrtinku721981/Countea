@@ -23,6 +23,26 @@ const Home = () => {
   });
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  // Autofill name and department when eid is entered and field loses focus
+  const handleEidBlur = async (e) => {
+    const eid = e.target.value;
+    if (eid.length >= 5) {
+      try {
+        const res = await fetch(`https://countea-backend.onrender.com/api/auth/employee/${eid}`);
+        if (res.ok) {
+          const data = await res.json();
+          setNote((prev) => ({
+            ...prev,
+            ename: data.ename,
+            department: data.department
+          }));
+        }
+      } catch (err) {
+        // Optionally handle error (e.g., show "not found" message)
+      }
+    }
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     // Prepare snacks array for backend
@@ -47,7 +67,6 @@ const Home = () => {
       snacks: snacksArr
     };
 
-    console.log(dataToSend);
     sendDataToBackend(dataToSend);
 
     setShowMessage(true); // Show the success message
@@ -129,7 +148,18 @@ const Home = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="eid" className="form-label">Employee ID</label>
-          <input type="number" min="0" className="form-control" name="eid" id="eid" placeholder="Please enter your id" value={note.eid} onChange={onChange} required />
+          <input
+            type="number"
+            min="0"
+            className="form-control"
+            name="eid"
+            id="eid"
+            placeholder="Please enter your id"
+            value={note.eid}
+            onChange={onChange}
+            onBlur={handleEidBlur}
+            required
+          />
         </div>
         <div className="mb-3">
           <label htmlFor="department" className="form-label">Department</label>
