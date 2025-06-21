@@ -26,7 +26,7 @@ const Home = () => {
   // Autofill name and department when eid is entered and field loses focus
   const handleEidBlur = async (e) => {
     const eid = e.target.value;
-    if (eid.length >= 5) {
+    if (eid.length >= 3) {
       try {
         const res = await fetch(`https://countea-backend.onrender.com/api/auth/employee/${eid}`);
         if (res.ok) {
