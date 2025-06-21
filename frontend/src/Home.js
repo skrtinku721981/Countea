@@ -13,6 +13,7 @@ const SNACK_OPTIONS = [
 
 const Home = () => {
   const [showMessage, setShowMessage] = useState(false);
+  const [purposeDropdownOpen, setPurposeDropdownOpen] = useState(false);
   const [note, setNote] = useState({
     ename: "",
     eid: "",
@@ -223,22 +224,44 @@ const Home = () => {
           )}
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="remarks" className="form-label">Purpose</label>
-          <select
-            className="form-control"
-            name="remarks"
-            id="remarks"
-            value={note.remarks}
-            onChange={onChange}
-            required
-          >
-            <option value="">Select purpose</option>
-            <option value="official">Official Purpose</option>
-            <option value="meeting">Meeting Purpose</option>
-            <option value="general">Guest Purpose</option>
-          </select>
-        </div>
+          
+        {/* remarks dropdown */}
+        
+        <div className="mb-3" style={{ textAlign: "center" }}>
+  <label htmlFor="remarks" className="form-label">Purpose</label>
+  <div className="dropdown full-width-dropdown" style={{ margin: "0 auto", width: "100%" }}>
+    <button
+      className="btn btn-secondary dropdown-toggle"
+      type="button"
+      style={{ width: "100%" }}
+      onClick={() => setPurposeDropdownOpen((open) => !open)}
+    >
+      {note.remarks
+        ? (note.remarks.charAt(0).toUpperCase() + note.remarks.slice(1) + " Purpose")
+        : "Select Purpose"}
+    </button>
+    <ul className={`dropdown-menu${purposeDropdownOpen ? " show" : ""}`} style={{ width: "100%" }}>
+      <li>
+        <button className="dropdown-item" type="button" onClick={() => {
+          setNote({ ...note, remarks: "official" });
+          setPurposeDropdownOpen(false);
+        }}>Official Purpose</button>
+      </li>
+      <li>
+        <button className="dropdown-item" type="button" onClick={() => {
+          setNote({ ...note, remarks: "meeting" });
+          setPurposeDropdownOpen(false);
+        }}>Meeting Purpose</button>
+      </li>
+      <li>
+        <button className="dropdown-item" type="button" onClick={() => {
+          setNote({ ...note, remarks: "general" });
+          setPurposeDropdownOpen(false);
+        }}>Guest Purpose</button>
+      </li>
+    </ul>
+  </div>
+</div>
 
         {/* button */}
         <div className="d-grid gap-2">
