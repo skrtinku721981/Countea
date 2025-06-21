@@ -234,9 +234,9 @@ const Home = () => {
             required
           >
             <option value="">Select purpose</option>
-            <option value="official">Official</option>
-            <option value="meeting">Meeting</option>
-            <option value="general">General</option>
+            <option value="official">Official Purpose</option>
+            <option value="meeting">Meeting Purpose</option>
+            <option value="general">Guest Purpose</option>
           </select>
         </div>
 
