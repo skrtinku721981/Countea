@@ -128,7 +128,7 @@ const Home = () => {
   // Validation for submit button
   const isSubmitDisabled =
     note.ename.length < 3 ||
-    note.eid.length < 5 ||
+    note.eid.length < 3 ||
     note.department.length < 2 ||
     Object.keys(note.snacks).length < 1 ||
     note.remarks.length < 2 ||
