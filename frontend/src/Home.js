@@ -142,10 +142,7 @@ const Home = () => {
         boxShadow: '0 4px 24px rgba(0,0,0,0.10)'
       }} >
         {/* input field */}
-        <div className="mb-3">
-          <label htmlFor="ename" className="form-label">Employee Name</label>
-          <input type="text" className="form-control" name="ename" id="ename" placeholder="Please enter your name" value={note.ename} onChange={onChange} required />
-        </div>
+        
         <div className="mb-3">
           <label htmlFor="eid" className="form-label">Employee ID</label>
           <input
@@ -160,6 +157,10 @@ const Home = () => {
             onBlur={handleEidBlur}
             required
           />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="ename" className="form-label">Employee Name</label>
+          <input type="text" className="form-control" name="ename" id="ename" placeholder="Please enter your name" value={note.ename} onChange={onChange} required />
         </div>
         <div className="mb-3">
           <label htmlFor="department" className="form-label">Department</label>
