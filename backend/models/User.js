@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment-timezone');
 const { Schema } = mongoose;
 
 const SnackSchema = new Schema({
@@ -10,8 +11,9 @@ const UserSchema = new Schema({
   ename: { type: String, required: true },
   eid: { type: Number, required: true },
   department: { type: String, required: true },
-  date: { type: Date, default: Date.now },
-  snacks: { type: [SnackSchema], required: true }, // <-- updated
+  // Save date in IST
+  date: { type: Date, default: () => moment().tz("Asia/Kolkata").toDate() },
+  snacks: { type: [SnackSchema], required: true },
   remarks: { type: String, required: true },
   otherSnack: { type: String }
 });

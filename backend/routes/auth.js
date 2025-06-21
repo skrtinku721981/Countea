@@ -9,7 +9,7 @@ router.post('/login', [
     body('eid', 'Enter a valid Employee ID').isNumeric(),
     body('department', 'Enter a valid department').isLength({ min: 2 }),
     body('snacks', 'Snacks must be an array').isArray({ min: 1 }),
-    body('remarks', 'Remarks are required').isLength({ min: 2 }),
+    body('remarks', 'Remarks are required').isIn(['official', 'meeting', 'general']),
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

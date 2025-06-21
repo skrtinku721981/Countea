@@ -142,7 +142,7 @@ const Home = () => {
         boxShadow: '0 4px 24px rgba(0,0,0,0.10)'
       }} >
         {/* input field */}
-        
+
         <div className="mb-3">
           <label htmlFor="eid" className="form-label">Employee ID</label>
           <input
@@ -224,8 +224,20 @@ const Home = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="remarks" className="form-label">Remarks</label>
-          <textarea className="form-control" name='remarks' id="remarks" rows="2" placeholder="Enter the remarks" value={note.remarks} onChange={onChange} required></textarea>
+          <label htmlFor="remarks" className="form-label">Purpose</label>
+          <select
+            className="form-control"
+            name="remarks"
+            id="remarks"
+            value={note.remarks}
+            onChange={onChange}
+            required
+          >
+            <option value="">Select purpose</option>
+            <option value="official">Official</option>
+            <option value="meeting">Meeting</option>
+            <option value="general">General</option>
+          </select>
         </div>
 
         {/* button */}
