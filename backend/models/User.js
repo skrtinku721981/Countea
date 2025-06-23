@@ -13,11 +13,11 @@ const UserSchema = new Schema({
   eid: { type: Number, required: true },
   department: { type: String, required: true },
   
-  Month: { 
+  month: { 
     type: String,
     default: () => moment().tz("Asia/Kolkata").format('MMMM YYYY') // Full month name
   },
-  Date_Time: { 
+  date_time: { 
     type: String,
      default: () => moment().tz("Asia/Kolkata").format('DD/MM/YYYY HH:mm:ss') // dd/mm/yyyy hh:mm:ss IST
   },
