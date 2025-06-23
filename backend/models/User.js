@@ -12,7 +12,7 @@ const UserSchema = new Schema({
   department: { type: String, required: true },
   date: { type: Date, default: Date.now },
   snacks: { type: [SnackSchema], required: true }, // <-- updated
-  remarks: { type: String, required: true },
+  purpose: { type: String, required: true },
   otherSnack: { type: String }
 });
 
