@@ -7,8 +7,8 @@ const SnackSchema = new Schema({
 }, { _id: false });
 
 const UserSchema = new Schema({
-  Ename: { type: String, required: true },
-  Eid: { type: Number, required: true },
+  ename: { type: String, required: true },
+  eid: { type: Number, required: true },
   department: { type: String, required: true },
   date: { type: Date, default: Date.now },
   snacks: { type: [SnackSchema], required: true }, // <-- updated
