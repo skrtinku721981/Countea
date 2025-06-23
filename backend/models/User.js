@@ -21,7 +21,7 @@ const UserSchema = new Schema({
   },
   dateString: { 
     type: String,
-    default: () => moment().tz("Asia/Kolkata").format('DD/MM/YYYY') // dd/mm/yyyy
+     default: () => moment().tz("Asia/Kolkata").format('DD/MM/YYYY HH:mm:ss') // dd/mm/yyyy hh:mm:ss IST
   },
   snacks: { type: [SnackSchema], required: true },
   remarks: { type: String, required: true },
