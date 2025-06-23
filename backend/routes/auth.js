@@ -9,14 +9,14 @@ router.post('/login', [
     body('eid', 'Enter a valid Employee ID').isNumeric(),
     body('department', 'Enter a valid department').isLength({ min: 2 }),
     body('snacks', 'Snacks must be an array').isArray({ min: 1 }),
-    body('purpose', 'purpose are required').isIn(['official', 'meeting', 'guest']),
+    body('remarks', 'Remarks are required').isIn(['official', 'meeting', 'guest']),
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const { ename, eid, department, snacks, purpose, otherSnack } = req.body;
+        const { ename, eid, department, snacks, remarks, otherSnack } = req.body;
 
         // Optionally, validate each snack object
         for (const snackObj of snacks) {
@@ -34,7 +34,7 @@ router.post('/login', [
             eid,
             department,
             snacks,      // snacks: [{ snack, quantity }]
-            purpose,
+            remarks,
             otherSnack
         });
 
