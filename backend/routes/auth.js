@@ -5,37 +5,37 @@ const { body, validationResult } = require('express-validator');
 
 // Login (submit snack data)
 router.post('/login', [
-    body('ename', 'Enter a valid User name').isLength({ min: 3 }),
-    body('eid', 'Enter a valid Employee ID').isNumeric(),
-    body('department', 'Enter a valid department').isLength({ min: 2 }),
-    body('snacks', 'Snacks must be an array').isArray({ min: 1 }),
-    body('remarks', 'Remarks are required').isIn(['official', 'meeting', 'guest']),
+    body('Ename', 'Enter a valid User name').isLength({ min: 3 }),
+    body('Eid', 'Enter a valid Employee ID').isNumeric(),
+    body('Department', 'Enter a valid department').isLength({ min: 2 }),
+    body('Snacks', 'Snacks must be an array').isArray({ min: 1 }),
+    body('Purpose', 'Purpose is required').isIn(['official', 'meeting', 'guest']),
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const { ename, eid, department, snacks, remarks, otherSnack } = req.body;
+        const { Ename, Eid, Department, Snacks, Purpose, OtherSnack } = req.body;
 
         // Optionally, validate each snack object
-        for (const snackObj of snacks) {
+        for (const snackObj of Snacks) {
             if (
-                typeof snackObj.snack !== "string" ||
-                typeof snackObj.quantity !== "number" ||
-                snackObj.quantity < 1
+                typeof snackObj.Snack !== "string" ||
+                typeof snackObj.Quantity !== "number" ||
+                snackObj.Quantity < 1
             ) {
                 return res.status(400).json({ error: "Invalid snack entry" });
             }
         }
 
         const user = await User.create({
-            ename,
-            eid,
-            department,
-            snacks,      // snacks: [{ snack, quantity }]
-            remarks,
-            otherSnack
+            Ename,
+            Eid,
+            Department,
+            Snacks,
+            Purpose,
+            OtherSnack
         });
 
         res.json(user);
@@ -47,15 +47,15 @@ router.post('/login', [
 });
 
 // Endpoint to get employee details by ID (for autofill)
-router.get('/employee/:eid', async (req, res) => {
+router.get('/employee/:Eid', async (req, res) => {
     try {
-        const user = await User.findOne({ eid: req.params.eid });
+        const user = await User.findOne({ Eid: req.params.Eid });
         if (!user) {
             return res.status(404).json({ error: "Employee not found" });
         }
         res.json({
-            ename: user.ename,
-            department: user.department
+            Ename: user.Ename,
+            Department: user.Department
         });
     } catch (error) {
         res.status(500).json({ error: "Server error" });
