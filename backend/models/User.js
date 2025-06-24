@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     type: String,
     default: () => moment().tz("Asia/Kolkata").format('MMMM YYYY')
   },
-  DateTime: { 
+  Date_Time: { 
     type: String,
     default: () => moment().tz("Asia/Kolkata").format('DD/MM/YYYY HH:mm:ss')
   },
